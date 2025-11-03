@@ -1,11 +1,13 @@
 import express, {Request,Response,NextFunction } from 'express'
-import 'empress-async-errors'
+import 'express-async-errors'
 import cors from 'cors'
+import router from './routes'
 
 const app = express()
 app.use(express.json()) //Uma função dentro de um função
 
 app.use(cors())
+app.use(router)
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         if(err instanceof Error){
