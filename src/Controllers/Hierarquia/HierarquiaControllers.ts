@@ -6,7 +6,7 @@ class HierarquiaControllers{
     async cadastrarHierarquia(req: Request, res: Response) {
         const { nome } = req.body
         const enviarDados = new HierarquiaServices()
-        const resposta = await enviarDados.cadastrarHierarquia(nome)
+        const resposta = await enviarDados.cadastrarHierarquia({nome})
         return res.json(resposta)
     }
 }

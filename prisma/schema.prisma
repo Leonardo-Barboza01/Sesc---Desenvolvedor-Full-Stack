@@ -9,6 +9,39 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Hierarquia {
+  // Modelo não seguro - id Int @id @default(autoincrement()), pois possibilita um ataque mais facilitado ao sistema, por meio de SQL inject
+  //Modelo Seguro de crir ID------------
+
+  id String @id @default(uuid()) //@ID campo de chave primaria ||  @default - define o padrao da informacao, nesse caso definindo o Id como (uuid())
+  nome String
+
+  data_criacao DateTime @default(now())
+  data_alteracao DateTime @updatedAt
+
+// Relacionamento de 1 / N - (onde nos funcionarios[], trás a ideia de um arry ou seja um lista, varios funcionarios)
+  funcionarios funcionarios[]
+
+@@map("hierarquia")
+}
+
+model funcionarios{
+  id String @id @default(uuid())
+  nome String
+  email String
+  senha String
+  status Boolean
+
+
+  data_criacao DateTime @default(now())
+  data_alteracao DateTime @updatedAt
+
+  hierarquia Hierarquia @relation(fields: [idHierarquia], references: [id])
+  idHierarquia String
+}
+
+// npx prisma db push - Atualiza os dados, sem apagar os dados antigos
