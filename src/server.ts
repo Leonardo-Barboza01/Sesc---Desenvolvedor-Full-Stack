@@ -20,6 +20,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         message: 'Erro Interno do Servidor'
     })
 })
-app.listen(3333, () => console.log('Servidor On-line na porta 3333'))
+app.listen(3333, () => console.log('Servidor On-line e operante chefe na porta 3333'))
     
     
