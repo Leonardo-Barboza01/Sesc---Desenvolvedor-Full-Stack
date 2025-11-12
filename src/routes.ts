@@ -12,6 +12,12 @@ const router = Router()
 
 router.post('/CadastrarHierarquia', new HierarquiaControllers().cadastrarHierarquia)
 router.post('/CadastrarFuncionarios', new FuncionariosControllers().cadastrarFuncionarios)
+
+// Metodos GET // Criação de EndPoint = rotas
+router.get('/VisualizarFuncionarios', new FuncionariosControllers().visualizarFuncionarios)
+
+
+
 // Get - Obter, pegar algo /  Post - Enviar algo
 
 // router: e um metodo de rotas/meio do express;

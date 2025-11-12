@@ -9,6 +9,7 @@ interface CadastrarFuncionarios {
 }
 
     class FuncionariosServices {
+        // async é o metodo
         async cadastrarFuncionarios ({nome,email,senha, status ,idHierarquia}: CadastrarFuncionarios) {
             await prismaClient.funcionarios.create({
                 data:{
@@ -23,6 +24,19 @@ interface CadastrarFuncionarios {
             return ({dados: 'cadastro efetuada com sucesso'})
             // Abaixo estou buscando: coluna e o dado presente nesse coluna. Ex: Na coluna nome, buscara o dado nome
             // Boas práticas e após criar o async, testar a conexão, por meio do "Console.log" | junto com async sempre vem com await
+        }
+
+        async visualizarFuncionarios(){  // Nesse caso o metodo async é um Void, assim iniando a função vazia
+                                         // sempre quando é async precisa await,para ele esperar
+            const resposta = await  prismaClient.funcionarios.findFirst({
+                select: {
+                    id: true,
+                    nome: true,
+                    email: true,
+                    status: true
+                }
+            })
+            return resposta
         }
 
     }
