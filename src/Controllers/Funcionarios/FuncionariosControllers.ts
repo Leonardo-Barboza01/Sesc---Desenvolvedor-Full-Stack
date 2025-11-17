@@ -4,9 +4,10 @@ import {FuncionariosServices} from '../../Services/Funcionarios/FuncionarioServi
 
 class FuncionariosControllers {
     async cadastrarFuncionarios(req: Request, res: Response){
-        const {nome, email, senha, status, idHierarquia} = req.body
+        const {nome,cpf,email, senha, status, idHierarquia} = req.body
         const enviarDados = new FuncionariosServices()
         const resposta = await enviarDados.cadastrarFuncionarios({
+            cpf,
             nome, 
             email,
             senha,
