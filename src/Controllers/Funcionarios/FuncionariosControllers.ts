@@ -23,8 +23,14 @@ class FuncionariosControllers {
         return res.json(resposta)
     }
 
-  
-
+    //boby só quando vem no corpo
+    //params - quando vem como paramentro
+   async apagarFuncionarios(req: Request, res: Response) {
+            const {id} = req.params
+            const enviarDados = new FuncionariosServices()
+            const resposta  = await enviarDados.apagarFuncionarios(id)
+            return res.json(resposta)
+    }
 }
 
 export { FuncionariosControllers}

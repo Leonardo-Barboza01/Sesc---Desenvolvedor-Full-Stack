@@ -16,7 +16,10 @@ router.post('/CadastrarFuncionarios', new FuncionariosControllers().cadastrarFun
 // Metodos GET // Criação de EndPoint = rotas
 router.get('/VisualizarFuncionarios', new FuncionariosControllers().visualizarFuncionarios)
 
-
+// Metodos Delete
+router.delete('/ApagarFuncionarios/:id', new FuncionariosControllers().apagarFuncionarios)
+// Os : trás a ideia que o que estiver após dois pontos(:) será transmido
+export default router
 
 // Get - Obter, pegar algo /  Post - Enviar algo
 
@@ -27,4 +30,3 @@ router.get('/VisualizarFuncionarios', new FuncionariosControllers().visualizarFu
 // .cadastrarFuncionarios) - Esse e o método para cadastrar os dados no banco.  
 
 // Se receber a informação como: UNDEFINED, isso quer dizer que os dados foram escritos errados, não batendo com referencia. Ex: "nome": "leoanrdo", se escrever errado da erro
-export default router

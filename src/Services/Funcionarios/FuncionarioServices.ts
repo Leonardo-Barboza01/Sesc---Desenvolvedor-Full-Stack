@@ -22,6 +22,7 @@ class FuncionariosServices {
                         email: email
                     }
                 ]
+                // OR = um ou o outro precisa ser valido/Ser igual para ser validado // AND = Ambos forem iguais a operação ocorre, pois já existe 
             }
         })
 
@@ -56,8 +57,31 @@ class FuncionariosServices {
             }
         })
         return resposta
+
     }
+    async apagarFuncionarios(id: string){
+        
+        const idNãoexiste = await prismaClient.funcionarios.findFirst({
+            where:{
+                id: id
+            }
+        })   
+        if(!idNãoexiste){
+            throw new Error ('Registro não Encontro') 
+        }
+        
+        await prismaClient.funcionarios.delete({
+            where: {
+                id: id
+            }
+        })
+        return ({dados: "Registro Excluido com sucesso"})
+
+    }
+
 
 }
 export { FuncionariosServices }
 
+//controllers - Back / Services - servidor
+//String(maisculula faz conversão) / string - texto
