@@ -1,4 +1,6 @@
 import prismaClient from '../../Prisma/PrismaCliente' // Importa a bibli. prisma
+import {hash} from 'bcryptjs'
+
 // interface serve para tipificar os dados
 // Sempre fora do Classe
 // Class apenas métodos
@@ -41,12 +43,14 @@ class FuncionariosServices {
             throw new Error('cpf/E-mail já Cadastros')
         }
 
+    
+        const senhaCrypt = await hash (senha, 8 )
         await prismaClient.funcionarios.create({
             data: {
                 nome: nome,
-                cpf: cpf,
+                cpf:  cpf,
                 email: email,
-                senha: senha,
+                senha: senhaCrypt,
                 status: status,
                 idHierarquia: idHierarquia
             }
