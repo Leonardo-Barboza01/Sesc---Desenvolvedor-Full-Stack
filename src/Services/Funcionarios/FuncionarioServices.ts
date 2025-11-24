@@ -1,5 +1,7 @@
 import prismaClient from '../../Prisma/PrismaCliente' // Importa a bibli. prisma
-// interface serve para:
+// interface serve para tipificar os dados
+// Sempre fora do Classe
+// Class apenas métodos
 interface CadastrarFuncionarios {
     nome: string,
     cpf: string,
@@ -8,6 +10,15 @@ interface CadastrarFuncionarios {
     status: boolean
     idHierarquia: string
 }
+
+interface alterarFuncionarios {
+    id: string,
+    nome: string,
+    cpf: string,
+    email: string,
+    status: boolean
+}
+
 
 class FuncionariosServices {
     // async é o metodo
@@ -44,9 +55,10 @@ class FuncionariosServices {
         // Abaixo estou buscando: coluna e o dado presente nesse coluna. Ex: Na coluna nome, buscara o dado nome
         // Boas práticas e após criar o async, testar a conexão, por meio do "Console.log" | junto com async sempre vem com await
     }
+    // Nesse caso o metodo async é um Void, assim iniando a função vazia
+    // sempre quando é async precisa await,para ele esperar
 
-    async visualizarFuncionarios() {  // Nesse caso o metodo async é um Void, assim iniando a função vazia
-        // sempre quando é async precisa await,para ele esperar
+    async visualizarFuncionarios() {
         const resposta = await prismaClient.funcionarios.findFirst({
             select: {
                 cpf: true,
@@ -59,28 +71,47 @@ class FuncionariosServices {
         return resposta
 
     }
-    async apagarFuncionarios(id: string){
-        
+    async apagarFuncionarios(id: string) {
+
         const idNãoexiste = await prismaClient.funcionarios.findFirst({
-            where:{
+            where: {
                 id: id
             }
-        })   
-        if(!idNãoexiste){
-            throw new Error ('Registro não Encontro') 
+        })
+        if (!idNãoexiste) {
+            throw new Error('Registro não Encontro')
         }
-        
+
+
+
         await prismaClient.funcionarios.delete({
             where: {
                 id: id
             }
         })
-        return ({dados: "Registro Excluido com sucesso"})
+        return ({ dados: "Registro Excluido com sucesso" })
 
     }
 
+    async alterarFuncionarios({ id, nome, cpf, email, status }: alterarFuncionarios) {
+        await prismaClient.funcionarios.update({
+            where: {
+                id: id
+            },
+            data: {
+                nome: nome,
+                cpf: cpf,
+                email: email,
+                status: status
+            }
+        })
+        return ({ dados: 'Registro Alterado com sucesso' })
+    }
+    // Prestar atenção no uso das chaves
+
 
 }
+
 export { FuncionariosServices }
 
 //controllers - Back / Services - servidor

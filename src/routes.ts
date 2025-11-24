@@ -10,11 +10,15 @@ const router = Router()
 
 // Criação da rotas de EndPoint \ // Metodo da Rota da API e por meio de "post"
 
+// Metodos POST
 router.post('/CadastrarHierarquia', new HierarquiaControllers().cadastrarHierarquia)
 router.post('/CadastrarFuncionarios', new FuncionariosControllers().cadastrarFuncionarios)
 
 // Metodos GET // Criação de EndPoint = rotas
 router.get('/VisualizarFuncionarios', new FuncionariosControllers().visualizarFuncionarios)
+
+//Metado PUT                          - Chama Func.controll     - Chama o metodo alterar
+router.put('/AlterarFuncionarios' , new FuncionariosControllers().alterarFuncionarios)
 
 // Metodos Delete
 router.delete('/ApagarFuncionarios/:id', new FuncionariosControllers().apagarFuncionarios)
@@ -30,3 +34,6 @@ export default router
 // .cadastrarFuncionarios) - Esse e o método para cadastrar os dados no banco.  
 
 // Se receber a informação como: UNDEFINED, isso quer dizer que os dados foram escritos errados, não batendo com referencia. Ex: "nome": "leoanrdo", se escrever errado da erro
+
+
+// Atenção no insomnia com o metedo deve igual o do Router
