@@ -63,7 +63,7 @@ class FuncionariosServices {
     // sempre quando é async precisa await,para ele esperar
 
     async visualizarFuncionarios() {
-        const resposta = await prismaClient.funcionarios.findFirst({
+        const resposta = await prismaClient.funcionarios.findMany({
             select: {
                 cpf: true,
                 id: true,

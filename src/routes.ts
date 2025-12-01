@@ -3,6 +3,7 @@ import {Router} from 'express'
 //Importação dos controladores 
 import { HierarquiaControllers } from './Controllers/Hierarquia/HierarquiaControllers'
 import { FuncionariosControllers } from './Controllers/Funcionarios/FuncionariosControllers'
+import { LoginFuncionarioControllers } from './Controllers/LoginFuncionariosControllers/LoginFuncionariosControllers'
 
 // para entrar no diretorio pode usar: ./ - para chegar a outra pasta || ../ - Volta uma pasta
 
@@ -13,6 +14,7 @@ const router = Router()
 // Metodos POST
 router.post('/CadastrarHierarquia', new HierarquiaControllers().cadastrarHierarquia)
 router.post('/CadastrarFuncionarios', new FuncionariosControllers().cadastrarFuncionarios)
+router.post('/LoginFuncionarios', new LoginFuncionarioControllers().loginFuncionarios)
 
 // Metodos GET // Criação de EndPoint = rotas
 router.get('/VisualizarFuncionarios', new FuncionariosControllers().visualizarFuncionarios)
@@ -25,8 +27,8 @@ router.delete('/ApagarFuncionarios/:id', new FuncionariosControllers().apagarFun
 // Os : trás a ideia que o que estiver após dois pontos(:) será transmido
 export default router
 
-// Get - Obter, pegar algo /  Post - Enviar algo
 
+// Get - Obter, pegar algo /  Post - Enviar algo
 // router: e um metodo de rotas/meio do express;
 //post: E o que irá conectar com a URL ;
 // ('/CadastrarFuncionarios' -  EndPoint;
